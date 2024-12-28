@@ -1,0 +1,5 @@
+# Redirect default Netlify subdomain to primary domain
+https://logicstack.netlify.app/* https://www.logicstack.co.za/:splat 301!
+
+# Redirect non-www to www
+https://logicstack.co.za/* https://www.logicstack.co.za/:splat 301! 

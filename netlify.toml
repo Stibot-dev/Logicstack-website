@@ -1,0 +1,32 @@
+[build]
+  publish = "/"
+  command = ""  # Leave empty since we're serving static files directly
+
+[[redirects]]
+  from = "https://logicstack.netlify.app/*"
+  to = "https://www.logicstack.co.za/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://logicstack.co.za/*"
+  to = "https://www.logicstack.co.za/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://logicstack.co.za/*"
+  to = "https://www.logicstack.co.za/:splat"
+  status = 301
+  force = true
+
+[build.environment]
+  NODE_VERSION = "16"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin" 

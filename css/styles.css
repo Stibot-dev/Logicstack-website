@@ -1,0 +1,1205 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #10a37f;      /* ChatGPT teal */
+    --secondary-color: #0e906f;    /* Deeper teal */
+    --accent-color: #1cc39b;       /* Light teal */
+    --text-color: #f8fafc;         /* Light gray */
+    --dark-bg: #0f1b1a;           /* Dark teal-black */
+    --darker-bg: #080f0e;         /* Darker background */
+    --card-bg: #1a2928;           /* Dark teal gray */
+    --border-color: #2d4745;      /* Border color */
+    --hover-color: #1cc39b;       /* Hover teal */
+    --text-muted: #94a3b8;        /* Muted text */
+    --gradient-1: linear-gradient(135deg, #10a37f, #1cc39b);
+    --gradient-2: linear-gradient(45deg, #0e906f, #10a37f);
+    --glow-1: 0 0 20px rgba(16, 163, 127, 0.4);
+    --glow-2: 0 0 30px rgba(28, 195, 155, 0.3);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+}
+
+/* Modern header styles */
+header {
+    background: rgba(6, 7, 20, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.logo-accent {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.main-nav {
+    display: block;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+    background: rgba(109, 40, 217, 0.1);
+}
+
+.nav-cta {
+    background: var(--gradient-1);
+    color: white !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 8px;
+    box-shadow: var(--glow-1);
+}
+
+.nav-cta:hover {
+    background: var(--gradient-2) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--glow-2);
+}
+
+/* Mobile menu button - initially hidden */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 1rem;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1001;
+        padding: 0.5rem;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 80%;
+        max-width: 400px;
+        background: var(--darker-bg);
+        padding: 5rem 2rem;
+        transition: right 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+    .main-nav.active {
+        right: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .main-nav a {
+        display: block;
+        font-size: 1.2rem;
+        padding: 1rem;
+        text-align: left;
+        width: 100%;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-cta {
+        margin-top: 1rem;
+        text-align: center !important;
+    }
+}
+
+/* Hero section */
+#hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--darker-bg);
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--gradient-1);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+    box-shadow: var(--glow-1);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: var(--gradient-2);
+    box-shadow: var(--glow-2);
+    transform: translateY(-2px);
+}
+
+/* Services section */
+#services {
+    padding: 5rem 2rem;
+    background-color: var(--light-bg);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.service-card {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--glow-2);
+    border-color: transparent;
+}
+
+.service-card:hover::before {
+    opacity: 0.1;
+}
+
+.service-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.4s ease;
+}
+
+.service-card:hover i {
+    transform: scale(1.1) translateY(-5px);
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.4s ease;
+}
+
+.service-card:hover h3 {
+    color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.service-card p {
+    color: var(--text-muted);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover p {
+    color: var(--text-color);
+}
+
+/* Portfolio section */
+#portfolio {
+    padding: 5rem 2rem;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.portfolio-item {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--glow-2);
+    border-color: transparent;
+}
+
+.portfolio-item:hover::before {
+    opacity: 0.1;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.portfolio-item h3, .portfolio-item p {
+    padding: 1rem;
+}
+
+/* Contact section */
+#contact {
+    padding: 5rem 2rem;
+    background-color: var(--darker-bg);
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--darker-bg);
+    color: var(--text-color);
+}
+
+#contact-form textarea {
+    height: 150px;
+}
+
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
+    color: #9ca3af;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-1);
+    outline: none;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--darker-bg);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.social-links {
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 10px;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+/* Pricing Section */
+#pricing {
+    padding: 5rem 2rem;
+    background-color: var(--dark-bg);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--glow-2);
+    border-color: var(--primary-color);
+}
+
+.pricing-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+}
+
+.currency {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-muted);
+}
+
+.features li i {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.pricing-card .cta-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pricing-card .cta-button:hover {
+    background: var(--gradient-2);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-1);
+}
+
+/* Popular Card Styling */
+.pricing-card.popular {
+    background: linear-gradient(145deg, rgba(124, 58, 237, 0.1), rgba(79, 70, 229, 0.1));
+    border: 1px solid var(--primary-color);
+    transform: scale(1.05);
+}
+
+.pricing-card.popular:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--gradient-1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+}
+
+/* Custom Solutions Section */
+.custom-solutions {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 2rem;
+    text-align: center;
+}
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.custom-item {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.custom-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-1);
+}
+
+.custom-item h4 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.custom-item p {
+    color: var(--text-muted);
+}
+
+.custom-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .pricing-card.popular {
+        transform: scale(1);
+    }
+
+    .pricing-card.popular:hover {
+        transform: translateY(-10px);
+    }
+}
+
+/* Add gradient to section headings */
+h2 {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: var(--glow-1);
+    display: inline-block;
+}
+
+/* Add subtle animation to pricing cards */
+.pricing-card {
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* Add dark scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--darker-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+} 
+
+/* Portfolio Coming Soon styles */
+.coming-soon {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(145deg, var(--card-bg), var(--darker-bg));
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.coming-soon i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.coming-soon h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.coming-soon p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.portfolio-item {
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.2);
+}
+
+/* Remove the previous img styles since we're not using images yet */
+.portfolio-item img {
+    display: none;
+} 
+
+/* Add these animation keyframes at the end of your CSS file */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(79, 70, 229, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(79, 70, 229, 0.2); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these to your existing styles */
+.service-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.service-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.service-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.pricing-card.popular {
+    animation: glow 3s ease-in-out infinite;
+}
+
+.cta-button {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.coming-soon i {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Animate elements when they come into view */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+} 
+
+/* Particle effect styles */
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: linear-gradient(var(--gradient-1));
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleFloat 15s infinite linear;
+    box-shadow: var(--glow-1);
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Position particles randomly */
+.particle:nth-child(3n) {
+    animation-delay: 2s;
+    left: 10%;
+}
+
+.particle:nth-child(3n + 1) {
+    animation-delay: 4s;
+    left: 50%;
+}
+
+.particle:nth-child(3n + 2) {
+    animation-delay: 6s;
+    left: 80%;
+}
+
+/* Add hover effect for service cards */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.service-card:hover::before {
+    transform: translateX(100%);
+} 
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+    /* Header adjustments */
+    header {
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+    }
+
+    nav ul {
+        padding: 0.5rem 0;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    /* Hero section */
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* Services section */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    /* Pricing section */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .pricing-card {
+        margin: 0 1rem;
+    }
+
+    /* Portfolio section */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    /* Contact form */
+    .contact-container {
+        padding: 0 1rem;
+    }
+
+    form input,
+    form textarea {
+        width: 100%;
+    }
+
+    /* Custom solutions */
+    .custom-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    /* Section spacing */
+    section {
+        padding: 3rem 1rem;
+    }
+
+    /* CTA button */
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .price {
+        font-size: 1.5rem;
+    }
+
+    .features {
+        padding: 0 0.5rem;
+    }
+
+    .custom-solutions {
+        margin: 2rem 1rem 0;
+    }
+} 
+
+/* Add these styles for the mobile menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--darker-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 80px 2rem 2rem 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+    .main-nav.active {
+        right: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 0.8rem 1rem;
+        width: 100%;
+        text-align: left;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-cta {
+        margin-top: 1rem;
+        text-align: center !important;
+    }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+} 
+
+/* Add animated borders */
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    padding: 2px;
+    background: var(--gradient-1);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Add glowing text effects */
+h2 {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: var(--glow-1);
+}
+
+/* Add particle effects */
+.particle {
+    background: linear-gradient(var(--gradient-1));
+    box-shadow: var(--glow-1);
+}
+
+/* Add neon effect to icons */
+.service-card i {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: var(--glow-1);
+}
+
+/* Add glowing borders to form inputs */
+#contact-form input:focus,
+#contact-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-1);
+}
+
+/* Add animated background to header */
+header {
+    background: linear-gradient(270deg, var(--darker-bg), var(--card-bg), var(--darker-bg));
+    background-size: 200% 100%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+} 
+
+/* Add after your existing styles */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+.data-stream {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(180deg, 
+        transparent,
+        var(--primary-color) 10%,
+        var(--accent-color) 50%,
+        var(--primary-color) 90%,
+        transparent
+    );
+    animation: dataFlow 3s linear infinite;
+    opacity: 0.3;
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+.data-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent-color);
+    animation: particleFloat 4s linear infinite;
+    opacity: 0.6;
+}
+
+/* Binary numbers floating in background */
+.binary-text {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Courier New', monospace;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    z-index: 5;
+    animation: matrixRain linear forwards;
+    top: -50px;
+}
+
+@keyframes matrixRain {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 0.4;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(1000px);
+    }
+} 
+
+/* Update binary text animation for mobile */
+@media (max-width: 768px) {
+    .binary-text {
+        font-size: 14px !important; /* Much smaller base size for mobile */
+        color: rgba(255, 255, 255, 0.3); /* More subtle on mobile */
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes matrixRain {
+        0% {
+            opacity: 0;
+            transform: translateY(0);
+        }
+        10% {
+            opacity: 0.3;
+        }
+        90% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(1000px);
+        }
+    }
+} 
+
+/* Add these styles */
+.soe-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.soe-list li {
+    padding: 0.5rem 0;
+    color: var(--text-muted);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.soe-list li:before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+} 
