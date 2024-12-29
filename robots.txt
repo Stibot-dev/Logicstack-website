@@ -1,3 +1,16 @@
 User-agent: *
 Allow: /
+Disallow: /js/
+Disallow: /css/
+Disallow: /.env
+Disallow: /.git/
+
+# Allow search engines to crawl JavaScript and CSS files
+Allow: /*.js$
+Allow: /*.css$
+
+# Specify crawl rate
+Crawl-delay: 10
+
+# Sitemap
 Sitemap: https://www.logicstack.co.za/sitemap.xml 

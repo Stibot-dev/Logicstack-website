@@ -1,6 +1,29 @@
 [build]
-  publish = "/"
-  command = ""  # Leave empty since we're serving static files directly
+  publish = "."
+  command = ""
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "https://logicstack.netlify.app/*"
@@ -8,25 +31,35 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "http://logicstack.co.za/*"
-  to = "https://www.logicstack.co.za/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://logicstack.co.za/*"
-  to = "https://www.logicstack.co.za/:splat"
-  status = 301
-  force = true
-
-[build.environment]
-  NODE_VERSION = "16"
-
+# Static files should be served directly
 [[headers]]
   for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin" 
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+
+# Add clear cache headers for HTML
+[[headers]]
+  for = "/*.html"
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Add clear cache headers for CSS and JS
+[[headers]]
+  for = "/*.css"
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# All other routes go to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  NODE_VERSION = "16" 
