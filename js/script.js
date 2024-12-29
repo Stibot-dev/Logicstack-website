@@ -56,9 +56,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            
+            // If it's the home link (empty hash or just #), scroll to top
+            if (this.getAttribute('href') === '#' || this.getAttribute('href') === '') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                // Otherwise scroll to the section
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
@@ -158,6 +168,67 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Hero background found, starting Matrix effect...');
         createMatrixEffect(heroBackground);
     }
+
+    // Track page views and interactions
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    }
+
+    // Track clicks on CTA buttons
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': 'CTA',
+                    'event_label': this.textContent
+                });
+            }
+        });
+    });
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    
+    // Apply initial theme
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+    });
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        // Add animation effect
+        themeToggle.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'none';
+        }, 300);
+    });
+    
+    function updateThemeIcon(theme) {
+        themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
 });
 
 function createMatrixEffect(container) {
@@ -211,4 +282,26 @@ function createMatrixEffect(container) {
             }, duration * 1000);
         }
     }, isMobile ? 600 : 400);
-} 
+}
+
+const navLinks = document.querySelectorAll('.nav-link');
+
+// Update active tab based on scroll position
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 60) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
+        }
+    });
+}); 
