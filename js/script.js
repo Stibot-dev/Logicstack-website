@@ -190,45 +190,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Theme toggle functionality
+    // Theme toggle functionality with Brave browser compatibility
     const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+    
     const themeIcon = themeToggle.querySelector('i');
     
-    // Check for system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-    
-    // Apply initial theme
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-    
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) {
-            const newTheme = e.matches ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            updateThemeIcon(newTheme);
+    // Try to get theme from multiple sources
+    function getInitialTheme() {
+        try {
+            // Try localStorage first
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) return savedTheme;
+            
+            // Try system preferences
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+        } catch (e) {
+            console.warn('Error accessing theme preferences:', e);
         }
-    });
+        
+        // Default to dark theme if all else fails
+        return 'dark';
+    }
     
+    // Apply theme with fallback options
+    function applyTheme(theme) {
+        try {
+            // Apply to HTML element
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // Apply to body as fallback
+            document.body.setAttribute('data-theme', theme);
+            
+            // Force theme on all elements that might need it
+            const themedElements = document.querySelectorAll('header, nav, main, footer, .pricing-card, .service-card');
+            themedElements.forEach(element => {
+                element.setAttribute('data-theme', theme);
+            });
+            
+            // Update icon
+            if (themeIcon) {
+                themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+            
+            // Try to save preference
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {
+                console.warn('Unable to save theme preference');
+            }
+            
+            // Force repaint
+            document.body.style.display = 'none';
+            document.body.offsetHeight;
+            document.body.style.display = '';
+            
+        } catch (e) {
+            console.error('Error applying theme:', e);
+        }
+    }
+    
+    // Initial theme application
+    const initialTheme = getInitialTheme();
+    applyTheme(initialTheme);
+    
+    // Theme toggle handler
     themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+        applyTheme(newTheme);
         
-        // Add animation effect
+        // Animation
         themeToggle.style.transform = 'rotate(360deg)';
         setTimeout(() => {
             themeToggle.style.transform = 'none';
         }, 300);
     });
-    
-    function updateThemeIcon(theme) {
-        themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-    }
 });
 
 function createMatrixEffect(container) {

@@ -5,40 +5,63 @@
     box-sizing: border-box;
 }
 
-:root {
-    /* Dark theme (default) */
-    --primary-color: #10a37f;
-    --secondary-color: #0e906f;
-    --accent-color: #1cc39b;
+:root,
+:root[data-theme="dark"] {
+    /* Dark theme (default) - dual color scheme */
+    --primary-color: #10B5B5; /* Teal */
+    --secondary-color: #2B5BA1; /* Blue */
+    --accent-color: #1CCCCC; /* Bright teal */
+    --accent-color-2: #3373C4; /* Bright blue */
     --text-color: #f8fafc;
-    --dark-bg: #0f1b1a;
-    --darker-bg: #080f0e;
-    --card-bg: #1a2928;
-    --border-color: #2d4745;
-    --hover-color: #1cc39b;
+    --dark-bg: #0f1b1b;
+    --darker-bg: #080f0f;
+    --card-bg: #1a2929;
+    --border-color: #2d4747;
+    --hover-color: #1CCCCC;
     --text-muted: #94a3b8;
-    --gradient-1: linear-gradient(135deg, #10a37f, #1cc39b);
-    --gradient-2: linear-gradient(45deg, #0e906f, #10a37f);
-    --glow-1: 0 0 20px rgba(16, 163, 127, 0.4);
-    --glow-2: 0 0 30px rgba(28, 195, 155, 0.3);
+    /* Dual-color gradients */
+    --gradient-1: linear-gradient(135deg, #10B5B5, #2B5BA1);
+    --gradient-2: linear-gradient(45deg, #2B5BA1, #10B5B5);
+    --glow-1: 0 0 20px rgba(16, 181, 181, 0.4);
+    --glow-2: 0 0 30px rgba(43, 91, 161, 0.3);
 }
 
 /* Light theme */
-[data-theme="light"] {
-    --primary-color: #10a37f;
-    --secondary-color: #0e906f;
-    --accent-color: #1cc39b;
-    --text-color: #1a2928;
+:root[data-theme="light"] {
+    /* Light theme - dual color scheme */
+    --primary-color: #10B5B5;
+    --secondary-color: #2B5BA1;
+    --accent-color: #1CCCCC;
+    --accent-color-2: #3373C4;
+    --text-color: #1a2929;
     --dark-bg: #ffffff;
     --darker-bg: #f8fafc;
     --card-bg: #ffffff;
     --border-color: #e2e8f0;
-    --hover-color: #0e906f;
+    --hover-color: #2B5BA1;
     --text-muted: #64748b;
-    --gradient-1: linear-gradient(135deg, #10a37f, #1cc39b);
-    --gradient-2: linear-gradient(45deg, #0e906f, #10a37f);
-    --glow-1: 0 0 20px rgba(16, 163, 127, 0.2);
-    --glow-2: 0 0 30px rgba(28, 195, 155, 0.15);
+    /* Dual-color gradients */
+    --gradient-1: linear-gradient(135deg, #10B5B5, #2B5BA1);
+    --gradient-2: linear-gradient(45deg, #2B5BA1, #10B5B5);
+    --glow-1: 0 0 20px rgba(16, 181, 181, 0.2);
+    --glow-2: 0 0 30px rgba(43, 91, 161, 0.15);
+}
+
+/* Force theme application */
+[data-theme="light"] {
+    background-color: var(--dark-bg) !important;
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] {
+    background-color: var(--dark-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Ensure immediate theme changes */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -64,7 +87,7 @@ header {
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,23 +95,43 @@ header {
 
 .logo {
     display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.6rem;
 }
 
-.logo h1 {
-    font-size: 1.8rem;
+.logo-image {
+    height: 32px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3px;
+}
+
+.logo-main {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
     background: var(--gradient-1);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 700;
+    white-space: nowrap;
+    padding: 2px 0;
 }
 
 .logo-accent {
+    font-size: 0.6rem;
     color: var(--text-muted);
-    font-size: 1rem;
-    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 .main-nav {
@@ -147,7 +190,7 @@ header {
 /* Mobile styles */
 @media (max-width: 768px) {
     .header-container {
-        padding: 1rem;
+        padding: 0.5rem 1rem;
     }
 
     .mobile-menu-btn {
@@ -199,6 +242,22 @@ header {
     .nav-cta {
         margin-top: 1rem;
         text-align: center !important;
+    }
+
+    .logo {
+        gap: 0.4rem;
+    }
+    
+    .logo-image {
+        height: 28px;
+    }
+    
+    .logo-main {
+        font-size: 1.1rem;
+    }
+    
+    .logo-accent {
+        font-size: 0.55rem;
     }
 }
 
@@ -1276,9 +1335,15 @@ header {
 /* Update binary text animation for mobile */
 @media (max-width: 768px) {
     .binary-text {
-        font-size: 14px !important; /* Much smaller base size for mobile */
-        color: rgba(255, 255, 255, 0.3); /* More subtle on mobile */
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        font-size: 14px !important;
+        color: var(--primary-color) !important;
+        opacity: 0.4 !important;
+        text-shadow: 0 0 12px var(--primary-color) !important;
+    }
+
+    [data-theme="light"] .binary-text {
+        opacity: 0.3 !important;
+        text-shadow: 0 0 15px var(--primary-color) !important;
     }
 
     @keyframes matrixRain {
@@ -1287,10 +1352,10 @@ header {
             transform: translateY(0);
         }
         10% {
-            opacity: 0.3;
+            opacity: 0.4;
         }
         90% {
-            opacity: 0.3;
+            opacity: 0.4;
         }
         100% {
             opacity: 0;
@@ -1508,4 +1573,94 @@ body {
 [data-theme="light"] .footer-links a:hover {
     color: var(--primary-color);
     opacity: 1;
+} 
+
+/* Force theme colors on mobile */
+@media (max-width: 768px) {
+    [data-theme="light"] body {
+        background-color: var(--dark-bg) !important;
+        color: var(--text-color) !important;
+    }
+
+    [data-theme="light"] .header-container,
+    [data-theme="light"] .main-nav,
+    [data-theme="light"] .pricing-card,
+    [data-theme="light"] .service-card {
+        background-color: var(--card-bg) !important;
+    }
+}
+
+/* Ensure smooth transitions */
+body, 
+.header-container,
+.main-nav,
+.pricing-card,
+.service-card {
+    transition: background-color 0.3s ease, color 0.3s ease;
+} 
+
+/* Update theme application */
+:root[data-theme="light"],
+[data-theme="light"] {
+    --primary-color: #10B5B5;
+    --secondary-color: #2B5BA1;
+    --accent-color: #1CCCCC;
+    --accent-color-2: #3373C4;
+    --text-color: #1a2929;
+    --dark-bg: #ffffff;
+    --darker-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --hover-color: #2B5BA1;
+    --text-muted: #64748b;
+    --gradient-1: linear-gradient(135deg, #10B5B5, #2B5BA1);
+    --gradient-2: linear-gradient(45deg, #2B5BA1, #10B5B5);
+    --glow-1: 0 0 20px rgba(16, 181, 181, 0.4);
+    --glow-2: 0 0 30px rgba(43, 91, 161, 0.3);
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"] {
+    --primary-color: #10B5B5;
+    --secondary-color: #2B5BA1;
+    --accent-color: #1CCCCC;
+    --accent-color-2: #3373C4;
+    --text-color: #f8fafc;
+    --dark-bg: #0f1b1b;
+    --darker-bg: #080f0f;
+    --card-bg: #1a2929;
+    --border-color: #2d4747;
+    --hover-color: #1CCCCC;
+    --text-muted: #94a3b8;
+    --gradient-1: linear-gradient(135deg, #10B5B5, #2B5BA1);
+    --gradient-2: linear-gradient(45deg, #2B5BA1, #10B5B5);
+    --glow-1: 0 0 20px rgba(16, 181, 181, 0.4);
+    --glow-2: 0 0 30px rgba(43, 91, 161, 0.3);
+}
+
+/* Force theme colors */
+[data-theme="light"] body,
+[data-theme="light"] header,
+[data-theme="light"] main,
+[data-theme="light"] footer {
+    background-color: var(--dark-bg) !important;
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] header,
+[data-theme="dark"] main,
+[data-theme="dark"] footer {
+    background-color: var(--dark-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* Ensure theme changes are immediate */
+* {
+    transition: none !important;
+}
+
+/* Add transitions back after initial load */
+body.loaded * {
+    transition: background-color 0.3s ease, color 0.3s ease !important;
 } 
