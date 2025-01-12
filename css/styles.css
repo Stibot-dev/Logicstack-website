@@ -331,16 +331,13 @@ header {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 16px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .service-card::before {
@@ -392,11 +389,12 @@ header {
 }
 
 .service-card h3 {
-    color: var(--text-color);
-    font-size: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
-    font-weight: 600;
-    transition: all 0.4s ease;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    position: relative;
+    z-index: 2;
 }
 
 .service-card:hover h3 {
@@ -718,13 +716,15 @@ footer {
 .popular-badge {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    right: -3rem;
     background: var(--gradient-1);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
     color: white;
+    padding: 0.5rem 3rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
     font-weight: 500;
+    box-shadow: var(--glow-1);
+    z-index: 1;
 }
 
 /* Custom Solutions Section */

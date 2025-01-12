@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.logicstack.co.za/</loc>
+    <image:image>
+      <image:loc>https://www.logicstack.co.za/images/logo/logo-512x512.png</image:loc>
+      <image:title>LogicStack Development Logo</image:title>
+      <image:caption>Professional Software Development Services in Cape Town, South Africa</image:caption>
+      <image:geo_location>Cape Town, South Africa</image:geo_location>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.logicstack.co.za/images/logo/logo-192x192.png</image:loc>
+      <image:title>LogicStack Development Logo - Android</image:title>
+      <image:caption>LogicStack Development - Mobile App Development in Cape Town</image:caption>
+      <image:geo_location>Cape Town, South Africa</image:geo_location>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.logicstack.co.za/images/logo/logo-180x180.png</image:loc>
+      <image:title>LogicStack Development Logo - iOS</image:title>
+      <image:caption>LogicStack Development - iOS App Development in Cape Town</image:caption>
+      <image:geo_location>Cape Town, South Africa</image:geo_location>
+    </image:image>
+  </url>
+</urlset> 
