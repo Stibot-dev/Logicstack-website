@@ -215,18 +215,43 @@
             text-decoration: underline;
         }
         
+        /* Add this to your existing styles */
+        .mobile-menu {
+            display: none; /* Hidden by default on desktop */
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+        
+        /* Ensure existing media query includes these rules */
         @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            .nav-links {
+                display: none; /* Hide desktop menu on mobile */
+            }
+            
+            .mobile-menu {
+                display: block; /* Show mobile menu button on mobile */
+            }
+            
             .terms-content {
-                padding: 25px;
+                padding: 25px 15px;
             }
             
             .terms-content h1 {
                 font-size: 2rem;
             }
             
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
+            .terms-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            body {
+                overflow-x: hidden;
             }
         }
     </style>
@@ -237,12 +262,19 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">
-                    <img src="assets/logo/logicstack-logo.png" alt="Logicstack" class="logo-img">
-                    <span class="logo-text">Logic<span>stack</span></span>
+                    <img src="img/logo-96x96.png" alt="Logicstack" class="logo-img">
+                    <div class="logo-text">Logic<span>stack</span></div>
                 </a>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#showcase">Work</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
                 </ul>
+                <!-- Add mobile menu button here -->
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </nav>
         </div>
     </header>
@@ -382,5 +414,39 @@
             </div>
         </div>
     </footer>
+
+    <!-- Add this before closing body tag -->
+    <script>
+        // Add mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '60px';
+                        navLinks.style.right = '20px';
+                        navLinks.style.backgroundColor = 'var(--darker-bg)';
+                        navLinks.style.padding = '20px';
+                        navLinks.style.borderRadius = '5px';
+                        navLinks.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+                        navLinks.style.zIndex = '1000';
+                        
+                        // Style the menu items
+                        const navItems = navLinks.querySelectorAll('li');
+                        navItems.forEach(item => {
+                            item.style.margin = '10px 0';
+                        });
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html> 

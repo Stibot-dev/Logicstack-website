@@ -879,6 +879,130 @@
             border-radius: 50%;
             filter: blur(1px);
         }
+
+        /* Add these media queries at the end of your style section */
+        @media (max-width: 768px) {
+            /* General mobile adjustments */
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            /* Header adjustments */
+            .nav-links {
+                display: none; /* Hide regular nav on mobile */
+            }
+            
+            .mobile-menu {
+                display: block; /* Show mobile menu button */
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: var(--text);
+            }
+            
+            /* Hero section adjustments */
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            /* Services section adjustments */
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* About section adjustments */
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-img, .about-text {
+                width: 100%;
+            }
+            
+            /* Contact section adjustments */
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100%;
+            }
+            
+            /* App showcase adjustments */
+            .app-showcase-content {
+                flex-direction: column;
+            }
+            
+            .app-info, .app-preview {
+                width: 100%;
+            }
+            
+            /* Testimonials adjustments */
+            .testimonial-item {
+                width: 100%;
+            }
+            
+            /* Fix overflow issues */
+            body {
+                overflow-x: hidden;
+            }
+            
+            section {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        
+        /* Additional fine-tuning for very small screens */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Add these additional mobile fixes to your media queries */
+        @media (max-width: 768px) {
+            /* Existing mobile styles... */
+            
+            /* Center text elements */
+            .hero-content, .section-title, .service-card, 
+            .faq-item, .contact-info, .about-text,
+            .testimonial-item, .pricing-card {
+                text-align: center;
+            }
+            
+            /* Ensure proper padding */
+            section {
+                padding: 60px 0;
+            }
+            
+            /* Fix any potential overflow issues */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Make buttons easier to tap */
+            .btn {
+                padding: 12px 20px;
+                display: inline-block;
+                margin: 10px auto;
+            }
+        }
     </style>
     <!-- Add this structured data script before the closing </head> tag -->
     <script type="application/ld+json">
@@ -916,17 +1040,19 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
-                    <img src="assets/logo/logicstack-logo.png" alt="Logicstack" class="logo-img">
-                    <span class="logo-text">Logic<span>stack</span></span>
-                </div>
+                <a href="index.html" class="logo">
+                    <img src="img/logo-96x96.png" alt="Logicstack" class="logo-img">
+                    <div class="logo-text">Logic<span>stack</span></div>
+                </a>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#showcase">Work</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div class="mobile-menu">☰</div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </nav>
         </div>
     </header>
@@ -1279,6 +1405,37 @@
                 if (newIndex >= galleryItems.length) newIndex = 0;
                 updateActiveScreenshot(newIndex);
             });
+        });
+
+        // Add mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '60px';
+                        navLinks.style.right = '20px';
+                        navLinks.style.backgroundColor = 'var(--darker-bg)';
+                        navLinks.style.padding = '20px';
+                        navLinks.style.borderRadius = '5px';
+                        navLinks.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+                        navLinks.style.zIndex = '1000';
+                        
+                        // Style the menu items
+                        const navItems = navLinks.querySelectorAll('li');
+                        navItems.forEach(item => {
+                            item.style.margin = '10px 0';
+                        });
+                    }
+                });
+            }
         });
     </script>
 </body>
