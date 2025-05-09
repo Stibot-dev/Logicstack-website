@@ -154,6 +154,8 @@
         
         .hero-content {
             max-width: 800px;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
@@ -578,8 +580,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: -1;
+            z-index: 1;
         }
         
         .particle {
@@ -1017,6 +1018,16 @@
                 margin: 10px auto;
             }
         }
+
+        /* Add this to your existing styles */
+        section:not(.hero) {
+            padding-top: 80px; /* Adds space at the top of each section except hero */
+        }
+        
+        /* Adjust your existing section padding if needed */
+        .showcase {
+            padding: 80px 0; /* Ensures consistent padding top and bottom */
+        }
     </style>
     <!-- Add this structured data script before the closing </head> tag -->
     <script type="application/ld+json">
@@ -1048,6 +1059,7 @@
       "description": "Expert software development and mobile application services tailored to your business needs."
     }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
     <!-- Header & Navigation -->
@@ -1059,8 +1071,9 @@
                     <div class="logo-text">Logic<span>stack</span></div>
                 </a>
                 <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#showcase">Work</a></li>
+                    <li><a href="#app-showcase">Work</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -1151,7 +1164,7 @@
     </div>
 
     <!-- Add this section after the Services section and before the About section -->
-    <section class="featured-app">
+    <section id="app-showcase" class="showcase">
         <div class="container">
             <div class="section-title">
                 <h2>Our <span>Mobile App</span></h2>
@@ -1450,6 +1463,77 @@
                     }
                 });
             }
+        });
+
+        // Add this particle configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#56a2e0'
+                    },
+                    shape: {
+                        type: 'circle'
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#56a2e0',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true
+            });
         });
     </script>
 </body>
