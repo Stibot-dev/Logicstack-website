@@ -65,6 +65,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            box-sizing: border-box;
         }
         
         /* Header & Navigation */
@@ -899,8 +900,8 @@
         @media (max-width: 768px) {
             /* General mobile adjustments */
             .container {
-                width: 95%;
-                padding: 0 10px;
+                padding: 0 15px;
+                width: 100%;
             }
             
             /* Header adjustments */
@@ -1027,6 +1028,30 @@
         /* Adjust your existing section padding if needed */
         .showcase {
             padding: 80px 0; /* Ensures consistent padding top and bottom */
+        }
+
+        /* Add these rules after your root variables */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Update your container class */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box; /* Ensure padding is included in width calculation */
+        }
+
+        /* Add this for mobile responsiveness */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+                width: 100%;
+            }
         }
     </style>
     <!-- Add this structured data script before the closing </head> tag -->
