@@ -1035,6 +1035,8 @@
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            margin: 0;
+            padding: 0;
         }
 
         /* Update your container class */
@@ -1049,8 +1051,29 @@
         /* Add this for mobile responsiveness */
         @media screen and (max-width: 768px) {
             .container {
-                padding: 0 15px;
                 width: 100%;
+                padding: 0 15px;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            /* Fix mobile menu positioning */
+            .nav-links {
+                width: 200px; /* Fixed width for menu */
+                right: 15px; /* Align with container padding */
+            }
+
+            /* Ensure hero section doesn't overflow */
+            .hero {
+                width: 100%;
+                overflow: hidden;
+            }
+
+            /* Ensure particles container doesn't cause overflow */
+            .particles-container {
+                width: 100vw;
+                left: 0;
+                right: 0;
             }
         }
     </style>
