@@ -88,6 +88,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            border-bottom: none;
         }
         
         .logo-img {
@@ -99,10 +101,17 @@
             font-size: 1.6rem;
             font-weight: 700;
             color: white;
+            text-decoration: none;
+            border-bottom: none;
         }
         
         .logo-text span {
             color: var(--accent);
+        }
+        
+        .logo a, .logo-text a {
+            text-decoration: none;
+            border-bottom: none;
         }
         
         .nav-links {
@@ -538,6 +547,11 @@
             .footer-content {
                 flex-direction: column;
                 text-align: center;
+            }
+            
+            .logo, .logo-text, .logo a, .logo-text a {
+                text-decoration: none !important;
+                border-bottom: none !important;
             }
         }
         
