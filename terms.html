@@ -492,15 +492,20 @@
 
     <!-- Add this before closing body tag -->
     <script>
-        // Add mobile menu functionality
+        // Update the mobile menu functionality
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.querySelector('.mobile-menu');
             const navLinks = document.querySelector('.nav-links');
             
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                navLinks.style.display = 'none';
+            }
+            
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', function() {
                     if (navLinks.style.display === 'flex') {
-                        navLinks.style.display = 'none';
+                        closeMobileMenu();
                     } else {
                         navLinks.style.display = 'flex';
                         navLinks.style.flexDirection = 'column';
@@ -519,6 +524,12 @@
                             item.style.margin = '10px 0';
                         });
                     }
+                });
+
+                // Add click event listeners to all nav links
+                const menuLinks = navLinks.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', closeMobileMenu);
                 });
             }
         });
