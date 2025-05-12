@@ -1076,6 +1076,73 @@
                 right: 0;
             }
         }
+
+        /* Update contact info styles */
+        @media (max-width: 768px) {
+            .contact-info {
+                word-break: break-word; /* Allows email to wrap properly */
+            }
+
+            .contact-info p {
+                font-size: 0.9rem; /* Slightly smaller font on mobile */
+                margin-bottom: 15px;
+            }
+
+            .contact-info i {
+                width: 25px; /* Fixed width for icons to align text */
+                margin-right: 10px;
+            }
+
+            .contact-info a {
+                display: inline-block;
+                word-wrap: break-word;
+                max-width: 100%;
+            }
+        }
+
+        /* Add these styles for the contact info section */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-info i {
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Mobile styles for contact section */
+        @media (max-width: 768px) {
+            .contact-info {
+                text-align: center;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .contact-info p {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .contact-info a {
+                word-break: break-all;
+                font-size: 0.9rem;
+            }
+
+            .contact-info i {
+                margin: 0 auto;
+                display: block;
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+        }
     </style>
     <!-- Add this structured data script before the closing </head> tag -->
     <script type="application/ld+json">
