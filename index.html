@@ -1078,29 +1078,6 @@
         }
 
         /* Update contact info styles */
-        @media (max-width: 768px) {
-            .contact-info {
-                word-break: break-word; /* Allows email to wrap properly */
-            }
-
-            .contact-info p {
-                font-size: 0.9rem; /* Slightly smaller font on mobile */
-                margin-bottom: 15px;
-            }
-
-            .contact-info i {
-                width: 25px; /* Fixed width for icons to align text */
-                margin-right: 10px;
-            }
-
-            .contact-info a {
-                display: inline-block;
-                word-wrap: break-word;
-                max-width: 100%;
-            }
-        }
-
-        /* Add these styles for the contact info section */
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -1129,18 +1106,19 @@
             .contact-info p {
                 justify-content: center;
                 flex-wrap: wrap;
+                gap: 20px; /* Increased gap between icon and text */
             }
 
             .contact-info a {
                 word-break: break-all;
                 font-size: 0.9rem;
+                padding: 0 10px; /* Added padding around email */
             }
 
             .contact-info i {
-                margin: 0 auto;
-                display: block;
+                margin: 0;
+                display: inline-block;
                 font-size: 1.2rem;
-                margin-bottom: 5px;
             }
         }
     </style>
