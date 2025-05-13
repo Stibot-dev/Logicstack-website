@@ -1534,8 +1534,28 @@
             
             // Function to close mobile menu
             function closeMobileMenu() {
-                navLinks.style.display = 'none';
+                // Only hide the menu if we're in mobile view
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
             }
+            
+            // Function to handle window resize
+            function handleResize() {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'row';
+                    navLinks.style.position = 'static';
+                    navLinks.style.padding = '0';
+                    navLinks.style.backgroundColor = 'transparent';
+                    navLinks.style.boxShadow = 'none';
+                } else {
+                    navLinks.style.display = 'none';
+                }
+            }
+
+            // Add resize event listener
+            window.addEventListener('resize', handleResize);
             
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', function() {
@@ -1553,7 +1573,6 @@
                         navLinks.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
                         navLinks.style.zIndex = '1000';
                         
-                        // Style the menu items
                         const navItems = navLinks.querySelectorAll('li');
                         navItems.forEach(item => {
                             item.style.margin = '10px 0';
@@ -1567,6 +1586,9 @@
                     link.addEventListener('click', closeMobileMenu);
                 });
             }
+
+            // Initial setup
+            handleResize();
         });
 
         // Add this particle configuration
